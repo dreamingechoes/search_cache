@@ -59,16 +59,20 @@ children = [
 Suppose you’re building a multilingual dictionary lookup:
 
 ```elixir
+# Start a named SearchCache instance (if not already supervised)
+{:ok, _pid} = SearchCache.start_link(name: :dict)
+
+# Define and cache dictionary entries
 entries = %{
   "hello" => %{es: "hola", fr: "bonjour"},
   "thanks" => %{es: "gracias", fr: "merci"}
 }
 
-# Cache the dictionary entry
-SearchCache.cache("hello", Map.get(entries, "hello"))
+# Store the entry under the :dict process
+SearchCache.cache(:dict, "hello", entries["hello"])
 
-# Fetch a translation
-case SearchCache.fetch("hello") do
+# Later, fetch a translation
+case SearchCache.fetch(:dict, "hello") do
   nil -> "Word not found"
   result -> result[:es]  # => "hola"
 end
