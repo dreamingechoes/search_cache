@@ -1,0 +1,24 @@
+# Elixir build and deps
+/_build/
+/deps/
+/erl_crash.dump
+
+# Elixir tools and coverage
+/.elixir_ls/
+/cover/
+
+# Test artifacts
+/test/tmp/
+
+# VSCode settings
+.vscode/
+
+# MacOS
+.DS_Store
+
+# dotenv and other env files
+.env*
+
+# OS and editor swap files
+*.swp
+*~
